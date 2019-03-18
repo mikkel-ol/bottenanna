@@ -2,7 +2,6 @@ const
 	prefix = "y!",
 	defaultVolume = 50,
 	maxVolume = 100,
-	apiKey = "AIzaSyBCX3trkhgep8ZTiiy7qqTpFLbkPA2raNk",
 	noOfSearches = 10,
 	fadeTime = 4000;
 
@@ -32,7 +31,7 @@ exports.TOKEN = require('./token');
 exports.PREFIX = prefix;
 exports.DEFAULT_VOLUME = defaultVolume;
 exports.MAX_VOLUME = maxVolume;
-exports.GOOGLE_API_KEY = apiKey;
+exports.GOOGLE_API_KEY = require('./apikey');
 exports.SEARCH_NO = noOfSearches;
 exports.FADE_TIME = fadeTime;
 exports.PLAY_NOSONG = play_noSong;
