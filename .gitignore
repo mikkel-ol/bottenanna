@@ -9,3 +9,6 @@ aws.txt
 
 # Token
 token.js
+
+# Google API key
+apikey.js
