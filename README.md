@@ -1,6 +1,6 @@
-# Music bot for Discord <img src="https://discordapp.com/assets/07dca80a102d4149e9736d4b162cff6f.ico" alt="" width="24px" height="24px">
+# Music bot for Discord <img src="https://github.com/mikkel-ol/bottenanna/blob/master/logo.png" alt="" width="24px" height="24px">
 
-A (simple) music bot for Discord that can play music from <img src="https://s.ytimg.com/yts/img/favicon_32-vflOogEID.png" alt="" width="14px" height="14px"> YouTube
+A (simple) music bot for <img src="https://discordapp.com/assets/07dca80a102d4149e9736d4b162cff6f.ico" alt="" width="14px" height="14px"> Discord that can play music from <img src="https://s.ytimg.com/yts/img/favicon_32-vflOogEID.png" alt="" width="14px" height="14px"> YouTube
 
 ### Requirements
 
