@@ -8,9 +8,9 @@ A (simple) music bot for <img src="https://discordapp.com/assets/07dca80a102d414
 
 ### Development
 
-Written with <a href="https://discord.js.org"><img src="https://discord.js.org/static/favicon.ico" alt="" width="14px" height="14px"> Discord.js</a>.
+Written with <a href="https://discord.js.org"><img src="https://discord.js.org/static/favicon.ico" alt="" width="14px" height="14px"> Discord.js</a>
 
-Built and run with <a href="https://nodejs.org/"><img src="https://nodejs.org/static/favicon.png" alt="" width="14px" height="14px"> Node.js</a>.
+Built and run with <a href="https://nodejs.org/"><img src="https://nodejs.org/static/favicon.png" alt="" width="14px" height="14px"> Node.js</a>
 
 ### Requirements
 
