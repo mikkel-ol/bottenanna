@@ -63,3 +63,8 @@ Prefix: `y!`
 `volume` &nbsp;&nbsp;&nbsp; - sets volume between `0` and `100`%
 
 `fade` &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; - fades the volume to between `0` and `100`%
+
+
+**Todos**:
+
+* Saving playlists and queues
