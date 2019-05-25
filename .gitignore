@@ -12,3 +12,6 @@ token.js
 
 # Google API key
 apikey.js
+
+# Node
+node_modules
