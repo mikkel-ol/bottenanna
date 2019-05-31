@@ -27,11 +27,11 @@ const bashDefault = '\033[0m',
 
 
 
-exports.TOKEN = 'MzU2MDc2OTgyODQ2NDg4NTc5.DJWHPA.O6StTqgIVqrU9QnEm2j8QX1BEig';
+exports.TOKEN = '';
 exports.PREFIX = prefix;
 exports.DEFAULT_VOLUME = defaultVolume;
 exports.MAX_VOLUME = maxVolume;
-exports.GOOGLE_API_KEY = 'AIzaSyCNJANyFap0hkGfoWLflEYrF18S6ueWwio';
+exports.GOOGLE_API_KEY = '';
 exports.SEARCH_NO = noOfSearches;
 exports.FADE_TIME = fadeTime;
 exports.PLAY_NOSONG = play_noSong;
