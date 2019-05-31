@@ -27,11 +27,11 @@ const bashDefault = '\033[0m',
 
 
 
-exports.TOKEN = '';
+exports.TOKEN = require('./token');
 exports.PREFIX = prefix;
 exports.DEFAULT_VOLUME = defaultVolume;
 exports.MAX_VOLUME = maxVolume;
-exports.GOOGLE_API_KEY = '';
+exports.GOOGLE_API_KEY = require('./apikey');
 exports.SEARCH_NO = noOfSearches;
 exports.FADE_TIME = fadeTime;
 exports.PLAY_NOSONG = play_noSong;
