@@ -1,23 +1,12 @@
-const 	ytdl = require('ytdl-core'),
-		YouTube = require('simple-youtube-api'),
-		{ Util } = require('discord.js');
+const 	
+	ytdl = require('ytdl-core'),
+	YouTube = require('simple-youtube-api'),
+	Util = require('discord.js').Util,
+	config = require('./config/app'),
+	youtube = new YouTube(require('./apikey')),
+	queue = new Map();
 
-const
-	{ MAX_VOLUME,
-		DEFAULT_VOLUME,
-		GOOGLE_API_KEY,
-		SEARCH_NO,
-		FADE_TIME,
-		PLAY_NOSONG,
-		NO_VOICECHANNEL,
-		NO_SEARCH,
-		NO_SELECTION } = require('./config');
-
-const 	youtube = new YouTube(GOOGLE_API_KEY),
-					queue = new Map();
-
-var 	isFading;
-
+var isFading;
 
 
 // Play dat funky music!
@@ -25,15 +14,13 @@ async function play(message) {
 
 	// Split arguments into array
 	const args = message.content.split(" "); // y!,play,hello,adele,trap,remix
-	if (!args[2]) return message.channel.send(PLAY_NOSONG);
+	if (!args[2]) return message.channel.send(config.messages.missing.song);
 	// Get string to search on youtube by slicing from 3. word onward
 	const searchString = args.slice(2).join(" "); // hello adele trap remix
-	// Get play queue for current server
-	const serverQueue = queue.get(message.guild.id);
 
 	// Save voice channel the message was sent from
 	const voiceChannel = message.member.voiceChannel;
-	if (!voiceChannel) return message.channel.send(NO_VOICECHANNEL);
+	if (!voiceChannel) return message.channel.send(config.messages.missing.voicechannel);
 
 	message.delete();
 
@@ -61,8 +48,8 @@ async function play(message) {
 			var video = await youtube.getVideo(args[2]);
 		} catch (error) { // If it's not a url, search for it on YT
 			try {
-				const videos = await youtube.searchVideos(searchString, SEARCH_NO);
-				if (videos.length == 0) return message.channel.send(NO_SEARCH);
+				const videos = await youtube.searchVideos(searchString, config.search.max);
+				if (videos.length == 0) return message.channel.send(config.messages.missing.searchResult);
 				let index = 1;
 
 				// Send message with songs
@@ -89,7 +76,7 @@ Select a song by returning a number on the list.
 				} catch (err) {
 					if (!(err instanceof Map)) console.error(err);
 					songSelectMsg.delete();
-					return message.channel.send(NO_SELECTION)
+					return message.channel.send(config.messages.missing.selection)
 				}
 				response = response.first().content.split(" "); // Split responses into array by white space
 				const videoIndex = parseInt(response[0]);
@@ -192,7 +179,7 @@ function volume(message) {
 	if ((args[2] != parseInt(args[2])) || args[2] < 0 || args[2] > 100) return message.channel.send("Volume must be a number between 0 and 100.");
 	message.delete();
 	serverQueue.volume = args[2];
-	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / MAX_VOLUME);
+	serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / config.volume.max);
 	return message.channel.send(`🔊 Volume is now: **${serverQueue.volume}%**`);
 }
 
@@ -212,7 +199,7 @@ function fade(message) {
 	var diff = args[2]-serverQueue.volume;
 	if (diff == 0) return message.channel.send(`Already at that volume!`);
 	// Calculate time out between each step
-	const interval = FADE_TIME / Math.abs(diff);
+	const interval = (config.volume.fadeTime * 1000) / Math.abs(diff);
 
 	isFading = true;
 	fading(message, diff, serverQueue, interval);
@@ -316,7 +303,7 @@ module.exports = {
 
 /**************************************
 
-						HELPER FUNCTIONS
+			HELPER FUNCTIONS
 
 ***************************************/
 
@@ -342,7 +329,7 @@ async function handleQueue(video, msg, voiceChannel, playlist, videoTimeStart, r
 			voiceChannel: voiceChannel,
 			connection: null,
 			songs: [],
-			volume: DEFAULT_VOLUME,
+			volume: config.volume.default,
 			playing: true
 		};
 		// Put constructed queue in map with guild ID as key
@@ -409,7 +396,7 @@ function playRecursive(guild, song, repeat) {
 	}, 500))
 	.on('error', error => console.error(error));
 
-	dispatcher.setVolumeLogarithmic(serverQueue.volume / MAX_VOLUME);
+	dispatcher.setVolumeLogarithmic(serverQueue.volume / config.volume.max);
 
 	if (!repeat) serverQueue.textChannel.send(`🎶 Started playing: **${song.title}**`);
 }
@@ -425,12 +412,12 @@ function fading(message, diff, serverQueue, interval) {
 		if (diff < 0) {
 			diff++;
 			serverQueue.volume--;
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / MAX_VOLUME);
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / config.volume.max);
 		}
 		else {
 			diff--;
 			serverQueue.volume++;
-			serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / MAX_VOLUME);
+			serverQueue.connection.dispatcher.setVolumeLogarithmic(serverQueue.volume / config.volume.max);
 		}
 
 		if (diff != 0) {

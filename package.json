@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "description": "Music bot for Discord",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
+  "author": "Mikkel O. Laursen",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^11.5.0",
+    "node-opus": "^0.3.2",
     "simple-youtube-api": "^5.1.1",
     "ytdl-core": "^0.29.2"
   }

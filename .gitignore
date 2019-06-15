@@ -1,11 +1,11 @@
 # macOS
 .DS_Store
 
-# Keys
-*.pem
+# Node
+node_modules
 
-# aws
-aws.txt
+#
+etc/
 
 # Token
 token.js
@@ -13,5 +13,3 @@ token.js
 # Google API key
 apikey.js
 
-# Node
-node_modules
