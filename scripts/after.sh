@@ -1,2 +1,2 @@
 #!/bin/zsh
-node install
+npm install
