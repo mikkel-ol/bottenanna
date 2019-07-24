@@ -1,3 +1,3 @@
 #!/bin/zsh
 forever stopall
-forever start /home/ec2-user/bottenanna/index.js -e /home/ec2-user/bottenanna/err.log -o /home/ec2-user/bottenanna/out.log
+forever start -o /home/ec2-user/bottenanna/out.log -e /home/ec2-user/bottenanna/err.log /home/ec2-user/bottenanna/index.js
