@@ -14,11 +14,17 @@ permissions:
   #    type:
   #      - file
 hooks:
-   BeforeInstall:
-    # - location: scripts/installapache.sh
-    #   runas: root
-    # - location: scripts/startapache.sh
-    #   runas: root
-   AfterInstall:
-    # - location: scripts/restartapache.sh
-    #   runas: root
+  #  BeforeInstall:
+  #   - location: scripts/before.sh
+  #     timeout: 300
+  #     runas: ec2-user
+
+  AfterInstall:
+    - location: scripts/after.sh
+      timeout: 300
+      runas: ec2-user
+
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 300
+      runas: ec2-user
