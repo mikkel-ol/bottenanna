@@ -1,6 +1,6 @@
 {
   "name": "moosikbot",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Music bot for Discord",
   "main": "index.js",
   "author": "Mikkel O. Laursen",
