@@ -4,7 +4,7 @@ version: 0.0
 os: linux
 files:
     - source: /
-      destination: ~/bottenanna
+      destination: /home/ec2-user/bottenanna
 permissions:
   #  - object: /var/www/html
   #    pattern: "**"
