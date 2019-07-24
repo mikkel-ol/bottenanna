@@ -1,2 +1,3 @@
-#!/bin/zsh
+#!/bin/bash
+
 npm install
