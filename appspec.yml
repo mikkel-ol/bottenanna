@@ -3,8 +3,8 @@
 version: 0.0
 os: linux
 files:
-  #  - source: /
-  #    destination: /var/www/html
+    - source: /
+      destination: /home/ec2-user
 permissions:
   #  - object: /var/www/html
   #    pattern: "**"
