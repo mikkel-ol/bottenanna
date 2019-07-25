@@ -1,10 +1,6 @@
 # <img src="https://github.com/mikkel-ol/bottenanna/raw/master/logo.png" alt="" width="24px" height="24px"> Music bot for Discord
 
-```diff
-- the bot is taken offline!
-```
-
-A (simple) music bot for <img src="https://discordapp.com/assets/07dca80a102d4149e9736d4b162cff6f.ico" alt="" width="14px" height="14px"> Discord that can play music from <img src="https://s.ytimg.com/yts/img/favicon_32-vflOogEID.png" alt="" width="14px" height="14px"> YouTube. <a href="https://discordapp.com/api/oauth2/authorize?client_id=356076982846488579&permissions=3221504&scope=bot">~~Add it to your server here!~~</a>
+A (simple) music bot for <img src="https://discordapp.com/assets/07dca80a102d4149e9736d4b162cff6f.ico" alt="" width="14px" height="14px"> Discord that can play music from <img src="https://s.ytimg.com/yts/img/favicon_32-vflOogEID.png" alt="" width="14px" height="14px"> YouTube. <a href="https://discordapp.com/api/oauth2/authorize?client_id=356076982846488579&permissions=3221504&scope=bot">Add it to your server here!</a>
 
 ### Development
 
