@@ -13,3 +13,5 @@ token.js
 # Google API key
 apikey.js
 
+# AWS cli config folder
+.aws/
