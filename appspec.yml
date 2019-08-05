@@ -3,14 +3,6 @@ os: linux
 files:
     - source: /
       destination: /home/ubuntu/bottenanna
-permissions:
-  #  - object: /var/www/html
-  #    pattern: "**"
-  #    owner: apache
-  #    group: apache
-  #    mode: 755
-  #    type:
-  #      - file
 hooks:
   #  BeforeInstall:
   #   - location: scripts/before.sh
