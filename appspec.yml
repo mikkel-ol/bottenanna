@@ -3,7 +3,7 @@ os: linux
 files:
     - source: /
       destination: /home/ubuntu/bottenanna
-permissions:
+#permissions:
   #  - object: /var/www/html
   #    pattern: "**"
   #    owner: apache
