@@ -3,6 +3,10 @@ os: linux
 files:
     - source: /
       destination: /home/ubuntu/bottenanna
+permissions:
+  - object: /home/ubuntu/bottenanna
+    owner: ubuntu
+    group: ubuntu
 hooks:
   #  BeforeInstall:
   #   - location: scripts/before.sh
