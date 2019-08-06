@@ -17,7 +17,7 @@ module.exports = {
             song: "I need to know what to play..",
             searchResult: "No search results on YouTube..",
             selection: "I need a number from 1-10 within 10 seconds. Cancelled song selection.",
-            voicechannel: "Join a voice channel so I know where to play moosik!"
+            voicechannel: "Join a voice channel so I know where to play sweet music!"
         }
     }
 }
