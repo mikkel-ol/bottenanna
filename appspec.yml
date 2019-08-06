@@ -1,13 +1,17 @@
 version: 0.0
 os: linux
 files:
-    - source: /
-      destination: /home/ubuntu/bottenanna
+  - source: /
+    destination: /home/ubuntu/bottenanna
+
 permissions:
   - object: /home/ubuntu/bottenanna
     owner: ubuntu
     group: ubuntu
     mode: 771
+    type:
+      - directory
+
 hooks:
   #  BeforeInstall:
   #   - location: scripts/before.sh
