@@ -5,7 +5,8 @@ files:
     destination: /home/ubuntu/bottenanna
 
 permissions:
-  - object: /home/ubuntu/bottenanna
+  - object: /home/ubuntu
+    pattern: bottenanna
     owner: ubuntu
     group: ubuntu
     mode: 771
