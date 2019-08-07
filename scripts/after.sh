@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/bottenanna
-npm i
+sudo -u ubuntu -H npm install --production
