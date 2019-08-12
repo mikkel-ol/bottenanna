@@ -3,6 +3,9 @@
   "version": "0.9.0",
   "description": "Music bot for Discord",
   "main": "index.js",
+  "scripts": {
+    "dev": "export NODE_ENV=dev && nodemon ."
+  },
   "author": "Mikkel O. Laursen",
   "license": "ISC",
   "dependencies": {
