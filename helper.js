@@ -3,7 +3,7 @@ const
 	YouTube = require('simple-youtube-api'),
 	Util = require('discord.js').Util,
 	config = require('./config/app'),
-	youtube = new YouTube(require('./apikey')),
+	youtube = new YouTube(process.env.YOUTUBE_API_KEY),
 	queue = new Map();
 
 var isFading;
@@ -372,29 +372,31 @@ function playRecursive(guild, song, repeat) {
 	}
 	// Play the moosik
 	const dispatcher = serverQueue.connection.playStream(ytdl(song.url, { begin: song.start }))
-	.on('end', reason => setTimeout(function() { // Stupid end bug
-		switch (reason) {
-			case "Stream is not generating quickly enough.": // Natural / song ended
-				// If repeat is not set, shift to next song
-				if (!serverQueue.songs[0].repeat) {
+		.on('end', reason => setTimeout(function() { // Stupid end bug
+			switch (reason) {
+				case "Stream is not generating quickly enough.": // Natural / song ended
+					// If repeat is not set, shift to next song
+					if (!serverQueue.songs[0].repeat) {
+						serverQueue.songs.shift();
+						var repeat = false;
+					}
+					else {
+						var repeat = true;
+					}
+					break;
+				case "user": // Ended by user
 					serverQueue.songs.shift();
-					var repeat = false;
-				}
-				else {
-					var repeat = true;
-				}
-				break;
-			case "user": // Ended by user
-				serverQueue.songs.shift();
-				break;
-			default:
-				console.log(reason);
-		}
+					break;
+				default:
+					console.log(reason);
+					serverQueue.songs.shift();
+					break;
+			}
 
-		// Call recursively
-		playRecursive(guild, serverQueue.songs[0], repeat);
-	}, 500))
-	.on('error', error => console.error(error));
+			// Call recursively
+			playRecursive(guild, serverQueue.songs[0], repeat);
+		}, 500))
+		.on('error', error => console.error(error));
 
 	dispatcher.setVolumeLogarithmic(serverQueue.volume / config.volume.max);
 

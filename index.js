@@ -1,65 +1,87 @@
-const 
-	Client = require('discord.js').Client,
-	config = require('./config/app'),
-	helper = require('./helper'),
-	token = require('./token');
+const Client = require("discord.js").Client,
+    db = require("./data/db"),
+    Logger = require("./services/logger"),
+    config = require("./config/app"),
+    helper = require("./helper"),
+    token = process.env.DISCORD_TOKEN;
 
 const bot = new Client();
 
-bot.on('message', async message => {
-	if (message.author.bot) return;
-	if (!message.content.toLowerCase().startsWith(config.prefix)) return;
+// Initialize logger with timestamps
+Logger.init();
 
-	const command = message.content.toLowerCase().split(' ')[1];
+//
+bot.on("message", async message => {
+    if (message.author.bot) return;
+    
+    // const guildId = message.guild.id;
+    // const guilds = db.get().collection("guilds");
 
-	switch (command) {
-		case "play":
-			helper.play(message);
-			break;
+    // const guild = await guilds.findOne({ _id: guildId });
 
-		case "stop":
-			helper.stop(message);
-			break;
+    // console.log(guild);
 
-		case "playing":
-			helper.playing(message);
-			break;
+    // let prefix = config.prefix;
 
-		case "skip":
-			helper.skip(message);
-			break;
+    // if (guild) prefix = guild.prefix;
 
-		case "pause":
-			helper.pause(message);
-			break;
+    if (!message.content.toLowerCase().startsWith(config.prefix)) return;
 
-		case "resume":
-			helper.resume(message);
-			break;
+    const command = message.content.toLowerCase().split(" ")[1];
 
-		case "volume":
-			helper.volume(message);
-			break;
+    switch (command) {
+        case "play":
+            helper.play(message);
+            break;
 
-		case "q":
-			helper.q(message);
-			break;
+        case "stop":
+            helper.stop(message);
+            break;
 
-		case "fade":
-			helper.fade(message);
-			break;
+        case "playing":
+            helper.playing(message);
+            break;
 
-		case "shuffle":
-			helper.shuffle(message);
-			break;
+        case "skip":
+            helper.skip(message);
+            break;
 
-		default:
-			return;
-	}
+        case "pause":
+            helper.pause(message);
+            break;
+
+        case "resume":
+            helper.resume(message);
+            break;
+
+        case "volume":
+            helper.volume(message);
+            break;
+
+        case "q":
+            helper.q(message);
+            break;
+
+        case "fade":
+            helper.fade(message);
+            break;
+
+        case "shuffle":
+            helper.shuffle(message);
+            break;
+
+        default:
+            return;
+    }
 });
 
+bot.on("error", console.error);
+bot.on("ready", () => console.log(config.messages.ready));
 
-bot.on('error', console.error);
-bot.on('ready', () => console.log(config.messages.ready));
+// Connect to MongoDB before using bot
+db.init((err, db) => {
+    if (err) return console.log(err);
 
-bot.login(token);
+    // Log the bot in
+    bot.login(token);
+});

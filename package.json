@@ -9,7 +9,10 @@
   "author": "Mikkel O. Laursen",
   "license": "ISC",
   "dependencies": {
+    "assert": "^2.0.0",
+    "console-stamp": "^0.2.9",
     "discord.js": "^11.5.0",
+    "mongodb": "^3.3.3",
     "node-opus": "^0.3.2",
     "simple-youtube-api": "^5.1.1",
     "ytdl-core": "^0.29.2"

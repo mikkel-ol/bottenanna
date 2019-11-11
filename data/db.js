@@ -22,7 +22,7 @@ module.exports = {
             (err, con) => {
                 if (err) return cb(err);
 
-                db = con.db("bottenanna");
+                db = con.db("bottenAnna");
                 return cb(null, db);
             }
         );
