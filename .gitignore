@@ -10,11 +10,8 @@ node_modules
 #
 etc/
 
-# Token
-token.js
-
-# Google API key
-apikey.js
+# Local file with environment variables
+.secrets
 
 # AWS cli config folder
 .aws/
