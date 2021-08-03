@@ -2,8 +2,8 @@ const Client = require("discord.js").Client,
     db = require("./data/db"),
     Logger = require("./services/logger"),
     config = require("./config/app"),
-    helper = require("./helper"),
-    token = process.env.DISCORD_TOKEN;
+    token = process.env.DISCORD_TOKEN,
+    commands = require('./commands');
 
 const bot = new Client();
 
@@ -30,43 +30,43 @@ bot.on("message", async message => {
 
     switch (command) {
         case "play":
-            helper.play(message);
+            commands.play(message);
             break;
 
         case "stop":
-            helper.stop(message);
+            commands.stop(message);
             break;
 
         case "playing":
-            helper.playing(message);
+            commands.playing(message);
             break;
 
         case "skip":
-            helper.skip(message);
+            commands.skip(message);
             break;
 
         case "pause":
-            helper.pause(message);
+            commands.pause(message);
             break;
 
         case "resume":
-            helper.resume(message);
+            commands.resume(message);
             break;
 
         case "volume":
-            helper.volume(message);
+            commands.volume(message);
             break;
 
         case "q":
-            helper.q(message);
-            break;
-
-        case "fade":
-            helper.fade(message);
+            commands.queue(message);
             break;
 
         case "shuffle":
-            helper.shuffle(message);
+            commands.shuffle(message);
+            break;
+
+        case "fade":
+            commands.fade(message);
             break;
 
         default:
