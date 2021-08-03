@@ -18,7 +18,7 @@ async function play(message) {
 	const searchString = args.slice(2).join(" "); // hello adele trap remix
 
 	// Save voice channel the message was sent from
-	const voiceChannel = message.member.voiceChannel;
+	const voiceChannel = message.member.voice.channel;
 	if (!voiceChannel) return message.channel.send(config.messages.missing.voicechannel);
 
 	message.delete();
@@ -50,6 +50,8 @@ async function play(message) {
 				const videos = await youtube.searchVideos(searchString, config.search.max);
 				if (videos.length == 0) return message.channel.send(config.messages.missing.searchResult);
 				let index = 1;
+
+				let songSelectMsg;
 
 				// Send message with songs
 				message.channel.send(`
@@ -108,7 +110,7 @@ Select a song by returning a number on the list.
 // Stop dat funky music
 function stop(message) {
 	const serverQueue = queue.get(message.guild.id);
-	if (!message.member.voiceChannel) return message.channel.send("You're not in a voice channel - join one so I know where to stop playing!");
+	if (!message.member.voice.channel) return message.channel.send("You're not in a voice channel - join one so I know where to stop playing!");
 	if (!serverQueue) return message.channel.send("How can I stop the moosik if there is nothing playing?!");
 	serverQueue.songs = [];
 	serverQueue.connection.dispatcher.end();
@@ -127,7 +129,7 @@ function playing(message) {
 // Skippidy skip
 function skip(message) {
 	const serverQueue = queue.get(message.guild.id);
-	if (!message.member.voiceChannel) return message.channel.send("You're not in a voice channel - why do you want to skip then, you troll?!");
+	if (!message.member.voice.channel) return message.channel.send("You're not in a voice channel - why do you want to skip then, you troll?!");
 	if (!serverQueue) return message.channel.send("How can I skip a song if there is nothing playing?!");
 	const song = serverQueue.songs[0];
 	serverQueue.connection.dispatcher.end();
@@ -138,7 +140,7 @@ function skip(message) {
 // Play dat fun....
 function pause(message) {
 	const serverQueue = queue.get(message.guild.id);
-	if (!message.member.voiceChannel) return message.channel.send("You're not in a voice channel - no trolling!");
+	if (!message.member.voice.channel) return message.channel.send("You're not in a voice channel - no trolling!");
 	if (serverQueue && serverQueue.playing) {
 		message.delete();
 		serverQueue.playing = false;
@@ -151,7 +153,7 @@ function pause(message) {
 // ..ky music!
 function resume(message) {
 	const serverQueue = queue.get(message.guild.id);
-	if (!message.member.voiceChannel) return message.channel.send("You're not in a voice channel, so you don't even know if anything is paused!");
+	if (!message.member.voice.channel) return message.channel.send("You're not in a voice channel, so you don't even know if anything is paused!");
 	if (serverQueue && !serverQueue.playing) {
 		message.delete();
 		serverQueue.playing = true;
@@ -169,7 +171,7 @@ function volume(message) {
 	const serverQueue = queue.get(message.guild.id);
 	const args = message.content.split(" ");
 
-	if (!message.member.voiceChannel) return message.channel.send("You're not in a voice channel - already 0% volume for you!");
+	if (!message.member.voice.channel) return message.channel.send("You're not in a voice channel - already 0% volume for you!");
 	if (!serverQueue) return message.channel.send("Can't crank the volume when nothing is playing..");
 	if (!args[2]) {
 		message.delete();
@@ -188,7 +190,7 @@ function fade(message) {
 	const args = message.content.split(" ");
 
 	if (isFading) return message.channel.send("I'm already fading! Try again afterwards..");
-	if (!message.member.voiceChannel) return message.channel.send("You're not in a voice channel - fading hopes!");
+	if (!message.member.voice.channel) return message.channel.send("You're not in a voice channel - fading hopes!");
 	if (!serverQueue) return message.channel.send("How can I fade silence?!");
 	if (!args[2]) return message.channel.send(`You need to tell me what to fade to..`);
 	if ((args[2] != parseInt(args[2])) || args[2] < 0 || args[2] > 100) return message.channel.send("Volume must be a number between 0 and 100.");
@@ -215,7 +217,7 @@ function q(message) {
 	let realQueue = serverQueue.songs.slice();
 	realQueue.shift(1);
 	if (realQueue.length > 20) {
-		qLength = realQueue.length - 20;
+		let qLength = realQueue.length - 20;
 		realQueue = realQueue.slice(0, 20);
 		realQueue.push({ title: `** ... and ${qLength} more**` });
 	}
@@ -249,7 +251,7 @@ function shuffle(message) {
 	let realQueue = serverQueue.songs.slice();
 	realQueue.shift(1);
 	if (realQueue.length > 20) {
-		qLength = realQueue.length - 20;
+		let qLength = realQueue.length - 20;
 		realQueue = realQueue.slice(0, 20);
 		realQueue.push({ title: `** ... and ${qLength} more**` });
 	}
