@@ -12,17 +12,6 @@ Logger.init();
 
 bot.on("message", async message => {
     if (message.author.bot) return;
-    
-    // const guildId = message.guild.id;
-    // const guilds = db.get().collection("guilds");
-
-    // const guild = await guilds.findOne({ _id: guildId });
-
-    // console.log(guild);
-
-    // let prefix = config.prefix;
-
-    // if (guild) prefix = guild.prefix;
 
     if (!message.content.toLowerCase().startsWith(config.prefix)) return;
 

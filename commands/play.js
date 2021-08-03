@@ -6,6 +6,27 @@ const ytdl = require("ytdl-core"),
 
 const queue = require("../shared/queue");
 
+async function handlePlaylist(args) {
+    let playlistNoOfSongs = args[3]; // Get no of videos to add to queue
+
+    if (!playlistNoOfSongs) playlistNoOfSongs = 20; // Default to 20
+
+    if (playlistNoOfSongs == "all") playlistNoOfSongs = undefined; // Play all by not sending a limit
+
+    const playlist = await youtube.getPlaylist(args[2]);
+    const videos = await playlist.getVideos(playlistNoOfSongs);
+
+    for (const video of Object.values(videos)) {
+        const videoResult = await youtube.getVideoByID(video.id);
+
+        await queue.handle(videoResult, message, voiceChannel, true);
+    }
+
+    return message.channel.send(
+        `✅ Playlist: **${playlist.title}** has been added to the queue!`
+    );
+}
+
 async function play(message) {
     // Split arguments into array
     const args = message.content.split(" "); // y!,play,hello,adele,trap,remix
@@ -23,36 +44,14 @@ async function play(message) {
 
     message.delete();
 
-    // It's a playlist
-    if (
-        args[2].match(
-            /^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/
-        )
-    ) {
-        let playlistNoOfSongs = args[3]; // Get no of videos to add to queue
+    const isPlaylist = args[2].match(
+        /^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$/
+    );
 
-        if (!playlistNoOfSongs) playlistNoOfSongs = 20; // Default to 20
-
-        if (playlistNoOfSongs == "all") playlistNoOfSongs = undefined; // Play all by not sending a limit
-
-        const playlist = await youtube.getPlaylist(args[2]);
-        const videos = await playlist.getVideos(playlistNoOfSongs);
-
-        for (const video of Object.values(videos)) {
-            const videoResult = await youtube.getVideoByID(video.id);
-
-            await queue.handle(videoResult, message, voiceChannel, true);
-        }
-
-        return message.channel.send(
-            `✅ Playlist: **${playlist.title}** has been added to the queue!`
-        );
-    }
-
-    // It's not a playlist
+    if (isPlaylist) await handlePlaylist(args);
     else {
         try {
-            // Play video with a clean URL
+            // Get video with a clean URL
             var video = await youtube.getVideo(args[2]);
         } catch (error) {
             // If it's not a url, search for it on YT
@@ -140,7 +139,7 @@ Select a song by returning a number on the list.
         } else {
             var repeat = false;
         }
-        
+
         // Send song to queue handler function
         return queue.handle(
             video,
