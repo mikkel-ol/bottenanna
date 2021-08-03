@@ -8,7 +8,6 @@ const
 
 var isFading;
 
-
 // Play dat funky music!
 async function play(message) {
 

@@ -10,7 +10,6 @@ const bot = new Client();
 // Initialize logger with timestamps
 Logger.init();
 
-//
 bot.on("message", async message => {
     if (message.author.bot) return;
     
