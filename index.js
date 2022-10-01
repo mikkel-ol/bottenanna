@@ -70,9 +70,9 @@ bot.on("error", console.error);
 bot.on("ready", () => console.log(config.messages.ready));
 
 // Connect to MongoDB before using bot
-db.init((err, db) => {
-    if (err) return console.log(err);
+// db.init((err, db) => {
+//     if (err) return console.log(err);
+// });
 
-    // Log the bot in
-    bot.login(token);
-});
+// Log the bot in
+bot.login(token);
