@@ -1,16 +1,19 @@
+require("dotenv").config();
+
 const Client = require("discord.js").Client,
     db = require("./data/db"),
     Logger = require("./services/logger"),
     config = require("./config/app"),
     token = process.env.DISCORD_TOKEN,
-    commands = require('./commands');
+    Intents = require("discord.js"),
+    commands = require("./commands");
 
 const bot = new Client();
 
 // Initialize logger with timestamps
 Logger.init();
 
-bot.on("message", async message => {
+bot.on("message", async (message) => {
     if (message.author.bot) return;
 
     if (!message.content.toLowerCase().startsWith(config.prefix)) return;

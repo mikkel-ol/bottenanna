@@ -15,3 +15,5 @@ etc/
 
 # AWS cli config folder
 .aws/
+
+.env

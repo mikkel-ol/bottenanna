@@ -13,8 +13,9 @@
     "assert": "^2.0.0",
     "console-stamp": "^0.2.10",
     "discord.js": "^12.5.3",
+    "dotenv": "^16.0.3",
     "mongodb": "^3.6.10",
     "simple-youtube-api": "^5.1.1",
-    "ytdl-core": "^4.9.0"
+    "ytdl-core": "^4.11.2"
   }
 }
